@@ -25,7 +25,7 @@ dekripsi (){
     arr=()
     i=0
     satu=97
-    jam=`date +%H`
+    jam=$(cat log.txt)
     while [ "$i" -lt "${#str}" ]; 
         do
         kw="$(printf '%d\n' "'${str:$i:1}")"
@@ -43,7 +43,7 @@ dekripsi (){
 
 
 # (a) 
-# cat /dev/urandom | tr -dc A-Za-z0-9 | head -c 28 > $*.txt
+cat /dev/urandom | tr -dc A-Za-z0-9 | head -c 28 > $*.txt
 
 
 # # (b)
@@ -55,3 +55,4 @@ enkripsi $namafile
 # dekripsi terserah
 
 mv "$*.txt" "$apalah.txt"
+echo $jam > log.txt
