@@ -38,17 +38,20 @@ dekripsi (){
         i=$((i+1))
     done
     apalah="$(printf '%s' "${arr[@]}")"
-    # return $apalah
+    printf "$apalah\n"
 }
 
 
 # (a) 
-cat /dev/urandom | tr -dc A-Za-z0-9 | head -c 28 > $*.txt
+# cat /dev/urandom | tr -dc A-Za-z0-9 | head -c 28 > $*.txt
 
 
-# (b)
+# # (b)
 file="$(echo $* | sed 's/[^A-Za-z]*//g')"
 namafile="${file%txt}"
-# printf $namafile
 enkripsi $namafile
+
+# fungsi dekripsi
+# dekripsi terserah
+
 mv "$*.txt" "$apalah.txt"

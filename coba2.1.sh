@@ -1,1 +1,0 @@
-echo $(for((i=1;i<=28;i++)); do printf '%s' "${RANDOM:0:1}"; done) | tr '[0-9]' '[A-Za-z]'
