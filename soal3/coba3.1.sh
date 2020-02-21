@@ -1,21 +1,22 @@
 grep "Location" wget.log > location.log
-readarray line < location.log
+readarray arr < location.log
 for ((i=0; i<28; i++))
 do
-for ((j=0; j<=i; j++))
-do
-if [ $i == $j ]
-then
-continue
-elif [ "${line[$i]}" == "${line[$j]}" ]
-then
-mv pdkt_kusuma_"$(($i+1))".jpg ./Desktop/SoalShiftSISOP20_modul1_E02/soal3/duplicate/duplicate_"$i".jpg
-fi
+    for ((j=i+1; j<=28; j++))
+    do
+        if [ "${arr[$i]}" = "${arr[$j]}" ]
+        then
+            # echo ${arr[$i]}
+            # echo ${arr[$j]}
+            # echo $i"=="$j
+            mv pdkt_kusuma_"$(($j+1))".jpg duplicate/duplicate_"$((num+=1))".jpg
+            # duplicate_"$((num+=1))"
+        fi
+    done
 done
-done
-
+num2=0
 for ((i=1; i<=28; i++))
 do
-mv pdkt_kusuma_"$i".jpg ./Desktop/SoalShiftSISOP20_modul1_E02/soal3/kenangan/kenangan_"$i".jpg
+mv pdkt_kusuma_"$i".jpg kenangan/kenangan_"$((num2+=1))".jpg
 done
 cp wget.log wget.log.bak
