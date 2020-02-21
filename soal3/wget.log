@@ -1,0 +1,15 @@
+--2020-02-21 16:58:47--  https://loremflickr.com/320/240/cat
+Resolving loremflickr.com (loremflickr.com)... 104.24.117.43, 104.24.116.43, 2606:4700:3033::6818:752b, ...
+Connecting to loremflickr.com (loremflickr.com)|104.24.117.43|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: /cache/resized/65535_49319955257_ec5504f002_320_240_nofilter.jpg [following]
+--2020-02-21 16:58:51--  https://loremflickr.com/cache/resized/65535_49319955257_ec5504f002_320_240_nofilter.jpg
+Reusing existing connection to loremflickr.com:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 23386 (23K) [image/jpeg]
+Saving to: ‘kenangan/pdkt_kusuma_3’
+
+     0K .......... .......... ..                              100% 14,4K=1,6s
+
+2020-02-21 16:58:53 (14,4 KB/s) - ‘kenangan/pdkt_kusuma_3’ saved [23386/23386]
+
