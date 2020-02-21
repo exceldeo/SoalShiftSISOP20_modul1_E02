@@ -1,0 +1,1 @@
+wget -P /home/excel/Desktop/SoalShiftSISOP20_modul1_E02 -O pdkt_kusuma_ https://loremflickr.com/320/240/cat 
