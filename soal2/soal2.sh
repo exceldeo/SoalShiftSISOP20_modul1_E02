@@ -1,22 +1,28 @@
+#!/bin/bash
+
+#define function
 enkripsi (){
     str=$1
     arr=()
     i=0
-    satu=122
-    jam=`date +%H`
+    z=122
+    hour=`date +%H`
+
     while [ "$i" -lt "${#str}" ]; 
         do
-        kw="$(printf '%d\n' "'${str:$i:1}")"
-        let jumlah=$kw+$jam
-        if [ $jumlah -gt $satu ]
+        an="$(printf '%d\n' "'${str:$i:1}")"
+        let total=$an+$hour
+
+        if [ $total -gt $z ]
             then
-            let jumlah-=26
+            let total-=26
         fi
-        arr+=("$(printf '%b' $(printf '\\x%x' $jumlah))")
+
+        arr+=("$(printf '%b' $(printf '\\x%x' $total))")
         i=$((i+1))
     done
-    apalah="$(printf '%s' "${arr[@]}")"
-    # echo "$apalah"
+
+    result="$(printf '%s' "${arr[@]}")"
 
 }
 
@@ -24,35 +30,39 @@ dekripsi (){
     str=$1
     arr=()
     i=0
-    satu=97
-    jam=$(cat log.txt)
+    a=97
+    hour=$(cat log_$1.txt)
+
     while [ "$i" -lt "${#str}" ]; 
         do
-        kw="$(printf '%d\n' "'${str:$i:1}")"
-        let jumlah=$kw-$jam
-        if [ $jumlah -lt $satu ]
+        an="$(printf '%d\n' "'${str:$i:1}")"
+        let total=$an-$hour
+        if [ $total -lt $a ]
             then
-            let jumlah+=26
+            let total+=26
         fi
-        arr+=("$(printf '%b' $(printf '\\x%x' $jumlah))")
+        arr+=("$(printf '%b' $(printf '\\x%x' $total))")
         i=$((i+1))
     done
-    apalah="$(printf '%s' "${arr[@]}")"
-    printf "$apalah\n"
+
+    back="$(printf '%s' "${arr[@]}")"
+
 }
 
 
 # (a) 
-cat /dev/urandom | tr -dc A-Za-z0-9 | head -c 28 > $*.txt
+cat /dev/urandom | tr -dc A-Za-z0-9 | head -c 28 > $*
 
 
 # # (b)
 file="$(echo $* | sed 's/[^A-Za-z]*//g')"
 namafile="${file%txt}"
+
+# (c)
 enkripsi $namafile
+mv "$*" "$result.txt"
 
-# fungsi dekripsi
-# dekripsi terserah
-
-mv "$*.txt" "$apalah.txt"
-echo $jam > log.txt
+# (d)
+# echo $hour > "log_$result".txt
+# dekripsi $result
+# mv "$result.txt" "$back.txt"
