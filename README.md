@@ -1,6 +1,12 @@
 # SoalShiftSISOP20_modul1_E02
 
-## Soal #1
+### Outline
+1. [Soal #1](#1) (Source Code : [soal1.sh](https://github.com/exceldeo/SoalShiftSISOP20_modul1_E02/blob/master/soal1/soal1.sh))
+2. [Soal #2](#2) (Source Code : [soal2.sh](https://github.com/exceldeo/SoalShiftSISOP20_modul1_E02/blob/master/soal2/soal2.sh), [soal2_enkripsi.sh](https://github.com/exceldeo/SoalShiftSISOP20_modul1_E02/blob/master/soal2/soal2_enkripsi.sh), [soal2_dekripsi.sh](https://github.com/exceldeo/SoalShiftSISOP20_modul1_E02/blob/master/soal2/soal2_dekripsi.sh))
+3. [Soal #3](#3) (Source Code : [soal3.sh](https://github.com/exceldeo/SoalShiftSISOP20_modul1_E02/blob/master/soal3/soal3.sh), [crontab.txt](https://github.com/exceldeo/SoalShiftSISOP20_modul1_E02/blob/master/soal3/crontab.txt), [soal3_c.sh](https://github.com/exceldeo/SoalShiftSISOP20_modul1_E02/blob/master/soal3/soal3_c.sh))
+---
+
+## #1
 Whits adalah seorang mahasiswa teknik informatika. Dia mendapatkan tugas praktikum untuk membuat laporan berdasarkan data yang ada pada file “​ Sample-Superstore.csv”. Namun dia tidak dapat menyelesaikan tugas tersebut. Laporan yang diminta berupa :
 
 a. Tentukan wilayah bagian (region) mana yang memiliki keuntungan (profit) paling sedikit
@@ -52,9 +58,12 @@ awk -F '\t' -v satu="${arr[0]}" -v dua="${arr[1]}" '
 + `sort -rg` mengurutkan output dari perintah sebelumnya dari produk yang memiliki keuntungan paling banyak hingga ke paling sedikit.
 + `awk '{sub($1 FS,""); print}'` mencetak semua kolom kecuali kolom pertama dan menghilangkan spasi dari output perintah sebelumnya.
 
+### Hasil Screenshot
+![ss_soal1](https://github.com/exceldeo/SoalShiftSISOP20_modul1_E02/blob/master/soal1/ss_soal1.png)
+
 ---
 
-## Soal #2
+## #2
 Pada suatu siang, laptop Randolf dan Afairuzr dibajak oleh seseorang dan kehilangan data-data penting. Untuk mencegah kejadian yang sama terulang kembali mereka meminta bantuan kepada Whits karena dia adalah seorang yang punya banyak ide. Whits memikirkan sebuah ide namun dia meminta bantuan kalian kembali agar ide tersebut cepat diselesaikan. Idenya adalah kalian (a) membuat sebuah script bash yang dapat menghasilkan password secara acak sebanyak 28 karakter yang terdapat huruf besar, huruf kecil, dan angka. (b) Password acak tersebut disimpan pada file berekstensi .txt dengan nama berdasarkan argumen yang diinputkan dan HANYA berupa alphabet . (c) Kemudian supaya file .txt tersebut tidak mudah diketahui maka nama filenya akan dienkripsi dengan menggunakan konversi huruf (string manipulation) yang disesuaikan dengan jam(0-23) dibuatnya file tersebut dengan program terpisah dengan (misal: password.txt dibuat pada jam 01.28 maka namanya berubah menjadi qbttxpse.txt dengan perintah ‘*bash soal2_enkripsi.sh password.txt*’. Karena p adalah huruf ke 16 dan file dibuat pada jam 1 maka 16+1=17 dan huruf ke 17 adalah q dan begitu pula seterusnya. Apabila melebihi *z* , akan kembali ke *a* , contoh: huruf *w* dengan jam 5.28, maka akan menjadi huruf *b*. ) dan (d) jangan lupa untuk membuat dekripsinya supaya nama file bisa kembali.
 
 ### Penyelesaian
@@ -135,7 +144,7 @@ Iterasi ini dilakukan untuk mengenkripsi argumen yang diinputkan selama iterator
 
 Hasil fungsi ini kemudian ditampung pada variabel result dengan `result="$(printf '%s' "${arr[@]}")"`. File yang sebelumnya bernama `$*.txt` diubah menjadi `$result.txt` dengan script bash berikut `mv "$*" "$result.txt"`.
 
-Untuk melakukan dekripsi pada poin (d), dilakukan pemanggilan fungsi dekripsi(). Namun sebelum itu, hendaknya kita menyimpan jam ketika mengenkripsi argumen yang diinputkan dengan script bash `echo $hour > "./log/log_$result".txt` pada file soal2_enkripsi.sh. Fungsi dekripsi ini terdapat pada file soal2_dekripsi.sh.
+Fungsi dekripsi di bawah terdapat pada file [soal2_dekripsi.sh](https://github.com/exceldeo/SoalShiftSISOP20_modul1_E02/blob/master/soal2/soal2_dekripsi.sh). Pemanggilan fungsi dekripsi() dilakukan untuk melakukan dekripsi pada poin (d). Namun sebelum itu, hendaknya kita menyimpan jam ketika mengenkripsi argumen yang diinputkan dengan script bash `echo $hour > "./log/log_$result".txt` pada file [soal2_enkripsi.sh](https://github.com/exceldeo/SoalShiftSISOP20_modul1_E02/blob/master/soal2/soal2_enkripsi.sh).
 ```bash
 dekripsi (){
     str=$1
@@ -188,9 +197,14 @@ Iterasi disini merupakan kebalikan dari iterasi pada fungsi enkripsi() dan dilak
 
 Setelah selesai melakukan iterasi, hasil dari dekripsi tersebut ditampung pada array arr dengan script bash `back="$(printf '%s' "${arr[@]}")"`. Nama file yang telah dienkripsi diubah kembali menjadi nama file sebelum dienkripsi dengan `mv "$*" "$back.txt"`.
 
+### Hasil Screenshot
+![ss_soal2](https://github.com/exceldeo/SoalShiftSISOP20_modul1_E02/blob/master/soal2/ss_soal2.png)
+![ss_soal2_enkripsi](https://github.com/exceldeo/SoalShiftSISOP20_modul1_E02/blob/master/soal2/ss_soal2_enkripsi.png)
+![ss_soal2_dekripsi](https://github.com/exceldeo/SoalShiftSISOP20_modul1_E02/blob/master/soal2/ss_soal2_dekripsi.png)
+
 ---
 
-## Soal #3
+## #3
 1 tahun telah berlalu sejak pencampakan hati Kusuma. Akankah sang pujaan hati kembali ke naungan Kusuma? Memang tiada maaf bagi Elen. Tapi apa daya hati yang sudah hancur, Kusuma masih terguncang akan sikap Elen. Melihat kesedihan Kusuma, kalian mencoba menghibur Kusuma dengan mengirimkan gambar kucing. (a)  Maka dari itu, kalian mencoba membuat script untuk mendownload 28 gambar dari "https://loremflickr.com/320/240/cat" menggunakan command wget dan menyimpan file dengan nama "pdkt_kusuma_NO" (contoh: pdkt_kusuma_1, pdkt_kusuma_2, pdkt_kusuma_3) serta jangan lupa untuk menyimpan log messages wget kedalam sebuah file "wget.log" . Karena kalian gak suka ribet, kalian membuat penjadwalan untuk menjalankan script download gambar tersebut. Namun, script download tersebut hanya berjalan (b) setiap 8 jam dimulai dari jam 6.05 setiap hari kecuali hari Sabtu. Karena gambar yang didownload dari link tersebut bersifat random, maka ada kemungkinan gambar yang terdownload itu identik. Supaya gambar yang identik tidak dikira Kusuma sebagai spam, maka diperlukan sebuah script untuk memindahkan salah satu gambar identik. Setelah memilah gambar yang identik, maka dihasilkan gambar yang berbeda antara satu dengan yang lain. Gambar yang berbeda tersebut, akan kalian kirim ke Kusuma supaya hatinya kembali ceria. Setelah semua gambar telah dikirim, kalian akan selalu menghibur Kusuma, jadi gambar yang telah terkirim tadi akan kalian simpan kedalam folder /kenangan dan kalian bisa mendownload gambar baru lagi. (c) Maka dari itu buatlah sebuah script untuk mengidentifikasi gambar yang identik dari keseluruhan gambar yang terdownload tadi. Bila terindikasi sebagai gambar yang identik, maka sisakan 1 gambar dan pindahkan sisa file identik tersebut ke dalam folder ./duplicate dengan format filename "duplicate_nomor" (contoh : duplicate_200, duplicate_201). Setelah itu lakukan pemindahan semua gambar yang tersisa kedalam folder ./kenangan dengan format filename "kenangan_nomor" (contoh: kenangan_252, kenangan_253). Setelah tidak ada gambar di ​ current directory , maka lakukan backup seluruh log menjadi ekstensi ".log bak".
 
 ### Penyelesaian
@@ -224,7 +238,7 @@ Agar script download tersebut hanya berjalan setiap 8 jam dimulai dari jam 6.05 
 ```
 `5` pada crontab di atas menunjukkan menit, `6-23/8` menunjukkan setiap 8 jam dari jam 6 sampai 23, `*` pertama menunjukkan tanggal berapapun, `*` kedua menunjukkan bulan berapapun, dan `0-5` menunjukkan dari hari Minggu sampai Jumat.
 
-Pada poin (c), kita diminta membuat script untuk mengidentifikasi gambar yang sama dari keseluruhan gambar yang sudah didownload. Ketika terindikasi gambar yang sama, gambar tersebut akan dipindahkan ke dalam folder ./duplicate dengan nama duplicate_nomor. Sisanya dipindahkan ke dalam folder ./kenangan dengan nama kenangan_nomor. Script ini sendiri terdapat pada file [soal3_c.sh]().
+Pada poin (c), kita diminta membuat script untuk mengidentifikasi gambar yang sama dari keseluruhan gambar yang sudah didownload. Ketika terindikasi gambar yang sama, gambar tersebut akan dipindahkan ke dalam folder ./duplicate dengan nama duplicate_nomor. Sisanya dipindahkan ke dalam folder ./kenangan dengan nama kenangan_nomor. Script ini sendiri terdapat pada file [soal3_c.sh](https://github.com/exceldeo/SoalShiftSISOP20_modul1_E02/blob/master/soal3/soal3_c.sh).
 ```bash
 mkdir duplicate
 mkdir kenangan
@@ -287,3 +301,6 @@ do
     fi
 done
 ```
+### Hasil Screenshot
+![ss_soal3](https://github.com/exceldeo/SoalShiftSISOP20_modul1_E02/blob/master/soal3/ss_soal3.png)
+![ss_soal3_c](https://github.com/exceldeo/SoalShiftSISOP20_modul1_E02/blob/master/soal3/ss_soal3_c.png)
