@@ -1,8 +1,15 @@
-grep "Location" wget.log > location.log
+#!/bin/bash
+
+mkdir duplicate
+mkdir kenangan
+
 readarray arr < location.log
-for ((i=0; i<28; i++))
+
+num=0
+
+for ((i=0; i<${#arr[@]}; i++))
 do
-    for ((j=i+1; j<=28; j++))
+    for ((j=i+1; j<=${#arr[@]}; j++))
     do
         if [ "${arr[$i]}" = "${arr[$j]}" ]
         then
@@ -10,13 +17,19 @@ do
             # echo ${arr[$j]}
             # echo $i"=="$j
             mv pdkt_kusuma_"$(($j+1))".jpg duplicate/duplicate_"$((num+=1))".jpg
-            # duplicate_"$((num+=1))"
         fi
     done
 done
-num2=0
-for ((i=1; i<=28; i++))
+
+angka=0
+
+for ((i=1; i<=${#arr[@]}; i++))
 do
-mv pdkt_kusuma_"$i".jpg kenangan/kenangan_"$((num2+=1))".jpg
+    file=pdkt_kusuma_"$i".jpg
+    if [ -f "$file" ]
+    then
+        mv "$file" kenangan/kenangan_"$((angka+=1))".jpg
+    fi
 done
+
 cp wget.log wget.log.bak

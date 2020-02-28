@@ -25,14 +25,11 @@ enkripsi (){
     result="$(printf '%s' "${arr[@]}")"
 }
 
-
-# (a) 
-cat /dev/urandom | tr -dc A-Za-z0-9 | head -c 28 > $*
-
-# (b)
-file="$(echo $* | sed 's/[^A-Za-z]*//g')"
-namafile="${file%txt}"
-
 # (c)
+file=$*
+namafile="${file%.txt}"
+
 enkripsi $namafile
 mv "$*" "$result.txt"
+
+echo $hour > "./log/log_$result".txt
